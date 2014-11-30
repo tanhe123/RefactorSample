@@ -18,9 +18,6 @@ public class NewReleasePrice extends Price {
 
     @Override
     public int getFrequentRenterPoints(int daysRented) {
-        if ((getPriceCode() == Movie.NEW_RELEASE) &&
-                daysRented > 1) // 新影片且租借1天以上增加2个积分
-            return 2;
-        else return 1;
+        return daysRented > 1 ? 2 : 1;
     }
 }
