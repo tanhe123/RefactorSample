@@ -46,23 +46,7 @@ public class Customer {
         for (Rental rental : rentals) {
             double thisAmount = 0;
 
-            // determine amounts for each line
-            switch (rental.getMovie().getPriceCode()) {
-                case Movie.REGULAR:// 对于普通影片, 两天内2元，超过2天，超出的每天收1.5元
-                    thisAmount += 2;
-                    if (rental.getDaysRented() > 2) {
-                        thisAmount += (rental.getDaysRented() -2) * 1.5;
-                    }
-                    break;
-                case Movie.NEW_RELEASE:// 对于新影片，每天3元收费
-                    thisAmount += rental.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDRENS:// 对于儿童片，3天内1.5元，超过3天，超出的每天收1.5圆
-                    thisAmount += 1.5;
-                    if (rental.getDaysRented() > 3)
-                        thisAmount += (rental.getDaysRented() - 3) * 1.5;
-                    break;
-            }
+            thisAmount = amountFor(rental);
 
             // add frequent renter points
             frequentRenterPoints++;
@@ -85,6 +69,29 @@ public class Customer {
                 + " frequent renter points";
         return result;
     }
+
+    private double amountFor(Rental rental) {
+        double thisAmount = 0;
+        // determine amounts for each line
+        switch (rental.getMovie().getPriceCode()) {
+            case Movie.REGULAR:// 对于普通影片, 两天内2元，超过2天，超出的每天收1.5元
+                thisAmount += 2;
+                if (rental.getDaysRented() > 2) {
+                    thisAmount += (rental.getDaysRented() -2) * 1.5;
+                }
+                break;
+            case Movie.NEW_RELEASE:// 对于新影片，每天3元收费
+                thisAmount += rental.getDaysRented() * 3;
+                break;
+            case Movie.CHILDRENS:// 对于儿童片，3天内1.5元，超过3天，超出的每天收1.5圆
+                thisAmount += 1.5;
+                if (rental.getDaysRented() > 3)
+                    thisAmount += (rental.getDaysRented() - 3) * 1.5;
+                break;
+        }
+        return thisAmount;
+    }
+
 
     // set and get methods
 
