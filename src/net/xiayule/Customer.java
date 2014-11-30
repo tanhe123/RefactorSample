@@ -39,26 +39,44 @@ public class Customer {
      * 生成详单的函数
      */
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
         String result = "Rental Record for " + getName() + "\n";
 
         for (Rental rental : rentals) {
-
-            // 累加常客积分
-            frequentRenterPoints += rental.getFrequentRenterPoints();
-
             // show figures for this rental
             result += "\t" + rental.getMovie().getTitle() + "\t"
                     + String.valueOf(rental.getCharge()) + "\n";
-
-            totalAmount += rental.getCharge();
         }
 
         // add footer lines
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints)
+        result += "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
+        result += "You earned " + String.valueOf(getTotalFrequentRenterPoints())
                 + " frequent renter points";
+        return result;
+    }
+
+    /**
+     * 计算总消费
+     */
+    private double getTotalCharge() {
+        double totalAmount = 0;
+
+        for (Rental rental : rentals) {
+            totalAmount += rental.getCharge();
+        }
+
+        return totalAmount;
+    }
+
+    /**
+     * 计算总常客积分
+     */
+    private int getTotalFrequentRenterPoints() {
+        int result = 0;
+
+        for (Rental rental : rentals) {
+            result += rental.getFrequentRenterPoints();
+        }
+
         return result;
     }
 
