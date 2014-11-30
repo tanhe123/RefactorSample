@@ -1,5 +1,10 @@
 package net.xiayule;
 
+import net.xiayule.price.ChildrensPrice;
+import net.xiayule.price.NewReleasePrice;
+import net.xiayule.price.Price;
+import net.xiayule.price.RegularPrice;
+
 /**
  * 除了计算费用，还要为常客计算积分，积分会根据租片种类是否为新片而有不同
  * Created by tan on 14-11-30.
@@ -17,7 +22,7 @@ public class Movie {
     /**
      * 影片类型, 分为普通片、儿童片和新片
      */
-    private int priceCode;
+    private Price price;
 
     /**
      * 构造函数
@@ -26,7 +31,8 @@ public class Movie {
      */
     public Movie(String title, int priceCode) {
         this.title = title;
-        this.priceCode = priceCode;
+//        this.priceCode = priceCode;
+        setPriceCode(priceCode);
     }
 
     /**
@@ -77,10 +83,22 @@ public class Movie {
     }
 
     public void setPriceCode(int priceCode) {
-        this.priceCode = priceCode;
+        switch (priceCode) {
+            case REGULAR:
+                price = new RegularPrice();
+                break;
+            case CHILDRENS:
+                price = new ChildrensPrice();
+                break;
+            case NEW_RELEASE:
+                price = new NewReleasePrice();
+                break;
+            default:
+                throw new IllegalArgumentException("priceCode 错误");
+        }
     }
 
     public int getPriceCode() {
-        return priceCode;
+        return price.getPriceCode();
     }
 }
