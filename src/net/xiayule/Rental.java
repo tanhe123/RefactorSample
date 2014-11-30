@@ -25,6 +25,10 @@ public class Rental {
         this.daysRented = daysRented;
     }
 
+    /**
+     * 收费函数
+     * @return
+     */
     public double getCharge() {
         double result = 0;
         // determine amounts for each line
@@ -45,6 +49,17 @@ public class Rental {
                 break;
         }
         return result;
+    }
+
+    /**
+     * 获取常客积分
+     */
+    public int getFrequentRenterPoints() {
+        if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
+                getDaysRented() > 1) // 新影片且租借1天以上增加2个积分
+            return 2;
+        else
+            return 1;// 其他类型的影片增加一个积分
     }
 
     // set and get methods

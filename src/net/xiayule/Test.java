@@ -26,5 +26,9 @@ public class Test {
                 "You earned 3 frequent renter points";
 
         System.out.println(小明.statement().equals(result));
+
+        System.out.println(小明.statement());
+
+        System.out.println(result);
     }
 }

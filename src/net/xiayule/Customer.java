@@ -44,13 +44,9 @@ public class Customer {
         String result = "Rental Record for " + getName() + "\n";
 
         for (Rental rental : rentals) {
-            // add frequent renter points
-            frequentRenterPoints++;
 
-            // add bonus for a two day new release rental
-            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-                    rental.getDaysRented() > 1) // 如果租借的是新影片且租借天数大于1,则再增加一积分
-                frequentRenterPoints++;
+            // 累加常客积分
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             // show figures for this rental
             result += "\t" + rental.getMovie().getTitle() + "\t"
