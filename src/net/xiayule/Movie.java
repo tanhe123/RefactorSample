@@ -47,11 +47,7 @@ public class Movie {
      * 获取常客积分
      */
     public int getFrequentRenterPoints(int daysRented) {
-        if ((getPriceCode() == Movie.NEW_RELEASE) &&
-                daysRented > 1) // 新影片且租借1天以上增加2个积分
-            return 2;
-        else
-            return 1;// 其他类型的影片增加一个积分
+        return price.getFrequentRenterPoints(daysRented);
     }
 
     // set and get methods

@@ -15,4 +15,12 @@ public class NewReleasePrice extends Price {
     public double getCharge(int daysRented) {
         return daysRented * 3;
     }
+
+    @Override
+    public int getFrequentRenterPoints(int daysRented) {
+        if ((getPriceCode() == Movie.NEW_RELEASE) &&
+                daysRented > 1) // 新影片且租借1天以上增加2个积分
+            return 2;
+        else return 1;
+    }
 }
