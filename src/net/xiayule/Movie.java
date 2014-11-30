@@ -29,6 +29,42 @@ public class Movie {
         this.priceCode = priceCode;
     }
 
+    /**
+     * 收费函数
+     * @return
+     */
+    public double getCharge(int daysRented) {
+        double result = 0;
+        // determine amounts for each line
+        switch (getPriceCode()) {
+            case Movie.REGULAR:// 对于普通影片, 两天内2元，超过2天，超出的每天收1.5元
+                result += 2;
+                if (daysRented > 2) {
+                    result += (daysRented -2) * 1.5;
+                }
+                break;
+            case Movie.NEW_RELEASE:// 对于新影片，每天3元收费
+                result += daysRented * 3;
+                break;
+            case Movie.CHILDRENS:// 对于儿童片，3天内1.5元，超过3天，超出的每天收1.5圆
+                result += 1.5;
+                if (daysRented > 3)
+                    result += (daysRented - 3) * 1.5;
+                break;
+        }
+        return result;
+    }
+
+    /**
+     * 获取常客积分
+     */
+    public int getFrequentRenterPoints(int daysRented) {
+        if ((getPriceCode() == Movie.NEW_RELEASE) &&
+                daysRented > 1) // 新影片且租借1天以上增加2个积分
+            return 2;
+        else
+            return 1;// 其他类型的影片增加一个积分
+    }
 
     // set and get methods
 
