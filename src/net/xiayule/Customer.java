@@ -46,7 +46,7 @@ public class Customer {
         for (Rental rental : rentals) {
             double thisAmount = 0;
 
-            thisAmount = amountFor(rental);
+            thisAmount = rental.getCharge();
 
             // add frequent renter points
             frequentRenterPoints++;
@@ -69,29 +69,6 @@ public class Customer {
                 + " frequent renter points";
         return result;
     }
-
-    private double amountFor(Rental rental) {
-        double result = 0;
-        // determine amounts for each line
-        switch (rental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:// 对于普通影片, 两天内2元，超过2天，超出的每天收1.5元
-                result += 2;
-                if (rental.getDaysRented() > 2) {
-                    result += (rental.getDaysRented() -2) * 1.5;
-                }
-                break;
-            case Movie.NEW_RELEASE:// 对于新影片，每天3元收费
-                result += rental.getDaysRented() * 3;
-                break;
-            case Movie.CHILDRENS:// 对于儿童片，3天内1.5元，超过3天，超出的每天收1.5圆
-                result += 1.5;
-                if (rental.getDaysRented() > 3)
-                    result += (rental.getDaysRented() - 3) * 1.5;
-                break;
-        }
-        return result;
-    }
-
 
     // set and get methods
 
