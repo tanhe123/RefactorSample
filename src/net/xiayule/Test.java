@@ -1,14 +1,18 @@
 package net.xiayule;
 
+import net.xiayule.price.ChildrensPrice;
+import net.xiayule.price.NewReleasePrice;
+import net.xiayule.price.RegularPrice;
+
 /**
  * Created by tan on 14-11-30.
  */
 public class Test {
     public static void main(String[] args) {
 
-        Movie 射雕英雄传 = new Movie("射雕英雄传", 0);
-        Movie 海面宝宝 = new Movie("海面宝宝", 2);
-        Movie 大长今 = new Movie("大长今", 1);
+        Movie 射雕英雄传 = new Movie("射雕英雄传", new RegularPrice());
+        Movie 海面宝宝 = new Movie("海面宝宝", new ChildrensPrice());
+        Movie 大长今 = new Movie("大长今", new NewReleasePrice());
 
         Customer 小明 = new Customer("小明");
 

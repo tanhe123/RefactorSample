@@ -27,12 +27,11 @@ public class Movie {
     /**
      * 构造函数
      * @param title 影片名称
-     * @param priceCode 影片类型
+     * @param price 影片价格类型
      */
-    public Movie(String title, int priceCode) {
+    public Movie(String title, Price price) {
         this.title = title;
-//        this.priceCode = priceCode;
-        setPriceCode(priceCode);
+        this.price = price;
     }
 
     /**
@@ -60,23 +59,11 @@ public class Movie {
         return title;
     }
 
-    public void setPriceCode(int priceCode) {
-        switch (priceCode) {
-            case REGULAR:
-                price = new RegularPrice();
-                break;
-            case CHILDRENS:
-                price = new ChildrensPrice();
-                break;
-            case NEW_RELEASE:
-                price = new NewReleasePrice();
-                break;
-            default:
-                throw new IllegalArgumentException("priceCode 错误");
-        }
+    public Price getPrice() {
+        return price;
     }
 
-    public int getPriceCode() {
-        return price.getPriceCode();
+    public void setPrice(Price price) {
+        this.price = price;
     }
 }
